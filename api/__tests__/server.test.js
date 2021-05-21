@@ -54,16 +54,30 @@ describe("[GET] request works", () => {
   });
   test("request comes back with seed data", async () => {
     const res = await request(server).get("/api/songs");
-    console.log(res.body);
     expect(res.body).toMatchObject(expected);
   });
 });
-// describe('[POST] request works', () => {
-//   beforeEach(()=>{
-//     await Songs.create(listOfSongs)
-//   })
-//   test('request comes back with seed data', () => {
-//     const res = request(server).get('/hobbits')
-//     expect(res.body).toMatchObject
-//   })
-// })
+describe("[POST] request works", () => {
+  test("responds with created object", async () => {
+    const res = await request(server).post("/api/songs").send(first);
+    expect(res.body).toMatchObject(first);
+  });
+  test("responds with status 201", async () => {
+    const res = await request(server).post("/api/songs").send(first);
+    expect(res.status).toBe(201);
+  });
+});
+describe("[DELETE] request works", () => {
+  beforeEach(async () => {
+    await request(server).post("/api/songs").send(first);
+    await request(server).post("/api/songs").send(second);
+  });
+  test("responds with status 200", async () => {
+    const res = await request(server).delete("/api/songs/1");
+    expect(res.status).toBe(200);
+  });
+  test("responds with deleted object", async () => {
+    const res = await request(server).delete("/api/songs/1");
+    expect(res.body).toMatchObject(first);
+  });
+});
