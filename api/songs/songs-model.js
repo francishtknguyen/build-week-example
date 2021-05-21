@@ -11,7 +11,13 @@ function getAll() {
 }
 function getById(song_id) {
   return db
-    .select("s.song_name", "ar.artist_name", "g.genre_type", "al.album_name")
+    .select(
+      "s.song_name",
+      "ar.artist_name",
+      "g.genre_type",
+      "al.album_name",
+      "s.song_id"
+    )
     .from("songs as s")
     .join("genres as g", "g.genre_id", "s.genre_id")
     .join("albums as al", "al.album_id", "s.album_id")

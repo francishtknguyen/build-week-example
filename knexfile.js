@@ -33,7 +33,8 @@ module.exports = {
     connection: "postgresql://postgres:Francis3@localhost:5432/bw-example",
   },
   testing: {
-    ...sharedConfig,
+    client: "pg",
+    migrations: { directory: "./api/data/migrations" },
     connection: "postgresql://postgres:Francis3@localhost:5432/bw-example_test",
   },
   production: {
