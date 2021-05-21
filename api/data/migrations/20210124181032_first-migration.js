@@ -35,7 +35,8 @@ exports.up = function (knex) {
         .unsigned()
         .notNullable()
         .references("song_id")
-        .inTable("songs");
+        .inTable("songs")
+        .onDelete("CASCADE");
       tbl
         .integer("artist_id")
         .unsigned()

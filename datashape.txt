@@ -1,0 +1,8 @@
+[
+  {
+    song_name,
+    artist,
+    genre_type,
+    album
+  }
+]
